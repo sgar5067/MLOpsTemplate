@@ -1,8 +1,13 @@
 $schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
 type: pipeline
 display_name: Training_pipeline
+<<<<<<< HEAD
 experiment_name: Training_pipline
+compute: azureml:sgmlopscjqy #setup replace `DS11` with your own AML compute cluster name
+=======
+experiment_name: Training_pipeline
 compute: azureml:DS11 #setup replace `DS11` with your own AML compute cluster name
+>>>>>>> main
 
 jobs:
   prep-job:
