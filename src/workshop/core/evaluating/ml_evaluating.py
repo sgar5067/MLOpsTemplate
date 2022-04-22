@@ -62,7 +62,7 @@ def main(args):
         r2 = r2_score(y_test, y_pred_current)
         mape = mean_absolute_percentage_error(y_test, y_pred_current)
         rmse = np.sqrt(mean_squared_error(y_test, y_pred_current))
-        print("Evaulation finished!. Metrics:")
+        print("Evaluation finished! Metrics:")
         print(f"R2:", r2)
         print(f"MAPE:", mape)
         print(f"RMSE:", rmse)
@@ -94,7 +94,6 @@ def main(args):
             print("Model does not exist")
     
         if current_model: #current model exist, perform evaluation
-            
             # test 2 algorithms
             y_pred_current = current_model.predict(X_test)                              
             r2_current = r2_score(y_test, y_pred_current)
@@ -103,7 +102,6 @@ def main(args):
             mlflow.log_metric("mape_current",mape_current)
             mlflow.log_metric("r2_current",r2_current)
             mlflow.log_metric("rmse_current",rmse_current)
-            
             if r2_candidate >= r2_current:
                 print("better model found, registering")
                 mlflow.sklearn.log_model(candidate_model,args.model_name)
@@ -119,7 +117,6 @@ def main(args):
             model_uri = f'runs:/{run_id}/{args.model_name}'
             mlflow.register_model(model_uri,args.model_name)
 
-            
 # run script
 if __name__ == "__main__":
     # parse args

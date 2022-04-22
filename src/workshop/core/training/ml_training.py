@@ -4,7 +4,6 @@ import os
 import argparse
 import mlflow
 import mlflow.sklearn
-
 from azureml.core import Run, Dataset,Datastore, Workspace
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
@@ -17,7 +16,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.metrics import r2_score, mean_absolute_percentage_error, mean_squared_error
 import joblib
 def parse_args():
-    # setup arg parser
+    # arg parser
     parser = argparse.ArgumentParser()
 
     parser.add_argument("--prep_data", default="data", type=str, help="Path to prepped data, default to local folder")
@@ -41,7 +40,10 @@ def createClassModel(algo_name, catg, nums):
     preprocesser = ColumnTransformer(transformers=[('num', numeric_transformer, nums), ('cat', categorical_transformer, catg)])
 
     if algo_name == 'linear_regression':
-        model = Ridge(alpha=100000)
+        #---------------------------------------------
+        #setup: Update alpha value
+        #---------------------------------------------
+        model = Ridge(alpha=100000)  #setup
     elif algo_name == 'random_forest':
         model = RandomForestRegressor()
     else:
@@ -97,6 +99,5 @@ def main(args):
 if __name__ == "__main__":
     # parse args
     args = parse_args()
-
     # run main function
     main(args)
